@@ -1,18 +1,23 @@
-# Utilizamos la imagen de node 18 en alpine como base
+# Dockerfile
+
+# Especifica la imagen base
 FROM node:18-alpine
 
-# Create app directory
-WORKDIR /usr/src/app
+# Establece el directorio de trabajo
+WORKDIR /app
 
-# Copiamos todos los archivos del proyecto al directorio de trabajo
+# Copia los archivos de la aplicación
+COPY package*.json ./
 COPY . .
 
-# Instalamos las dependencias y compilamos el proyecto
+# Instala las dependencias
 RUN npm install
+
+# Compila la aplicación
 RUN npm run build
 
-# Exponemos el puerto 3000
+# Expone el puerto necesario para la aplicación
 EXPOSE 3000
 
-# Iniciamos la aplicación
-CMD [ "npm", "run", "start" ]
+# Comando para ejecutar la aplicación
+CMD ["npm", "start"]
