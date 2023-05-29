@@ -3,6 +3,9 @@
 # Especifica la imagen base
 FROM node:18-alpine
 
+# Instala pnpm para manejar las dependencias
+RUN npm install -g pnpm
+
 # Establece el directorio de trabajo
 WORKDIR /app
 
@@ -10,8 +13,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY . .
 
-# Instala las dependencias
-RUN npm install
+# Instala las dependencias usando pnpm
+RUN pnpm install
 
 # Expone el puerto necesario para la aplicación
 EXPOSE 3000
